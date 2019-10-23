@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "PGN",
+    "description": "TODO: Add Description",
+    "contact": {}
+  },
+  "host": "popayapi.local",
+  "basePath": "/index.php/api",
+  "securityDefinitions": {},
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/token": {
+      "post": {
+        "description": "TODO: Add Description",
+        "summary": "create token",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "TokenPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/createtokenrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "description": "\t",
+        "summary": "get user detail",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "UserPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/getuserdetailrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/refresh_token": {
+      "post": {
+        "description": "TODO: Add Description",
+        "summary": "refresh token",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "RefreshTokenPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/refreshtokenrequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "definitions": {
+    "createtokenrequest": {
+      "title": "createtokenrequest",
+      "example": {
+        "grant_type": "password",
+        "client_id": "testclient",
+        "client_secret": "testpass",
+        "username": "sandi.hardi",
+        "password": "cG9wYXk="
+      },
+      "type": "object",
+      "properties": {
+        "grant_type": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "grant_type",
+        "client_id",
+        "client_secret",
+        "username",
+        "password"
+      ]
+    },
+    "getuserdetailrequest": {
+      "title": "getuserdetailrequest",
+      "example": {
+        "username": "sandi.hardi",
+        "password": "cG9wYXk="
+      },
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "refreshtokenrequest": {
+      "title": "refreshtokenrequest",
+      "example": {
+        "grant_type": "refresh_token",
+        "client_id": "testclient",
+        "client_secret": "testpass",
+        "refresh_token": "4e926f865438567e5b822617b58b83380235c79d"
+      },
+      "type": "object",
+      "properties": {
+        "grant_type": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "grant_type",
+        "client_id",
+        "client_secret",
+        "refresh_token"
+      ]
+    },
+    "getLoadDataRequest": {
+      "title": "getLoadDataRequest",
+      "example": {
+        "view": "REFTYPE",
+        "dbtype": "oci",
+        "filter": [
+          {
+            "field": "cdescription",
+            "data": {
+              "type": "string",
+              "comparison": "=",
+              "value": "Vendor"
+            }
+          }
+        ],
+        "page": 1,
+        "start": 0,
+        "limit": 16,
+        "sort": [
+          {
+            "property": "wilayah",
+            "direction": "DESC"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "view": {
+          "type": "string"
+        },
+        "dbtype": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "start": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sort"
+          }
+        }
+      },
+      "required": [
+        "view",
+        "dbtype",
+        "filter",
+        "page",
+        "start",
+        "limit",
+        "sort"
+      ]
+    },
+    "Filter": {
+      "title": "Filter",
+      "example": {
+        "field": "cdescription",
+        "data": {
+          "type": "string",
+          "comparison": "=",
+          "value": "Vendor"
+        }
+      },
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/Data"
+        }
+      },
+      "required": [
+        "field",
+        "data"
+      ]
+    },
+    "Data": {
+      "title": "Data",
+      "example": {
+        "type": "string",
+        "comparison": "=",
+        "value": "Vendor"
+      },
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "comparison": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "comparison",
+        "value"
+      ]
+    },
+    "Sort": {
+      "title": "Sort",
+      "example": {
+        "property": "wilayah",
+        "direction": "DESC"
+      },
+      "type": "object",
+      "properties": {
+        "property": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "property",
+        "direction"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}
